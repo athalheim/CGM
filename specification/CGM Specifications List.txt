@@ -1,0 +1,26 @@
+Information technology -- Computer graphics -- Metafile for the storage and transfer of picture description information
+-----------------------------------------------------------------------------------------------------------------------
+From:	https://www.nettedautomation.com/standardization/iso/public.html
+	https://en.wikipedia.org/wiki/Computer_Graphics_Metafile
+
+
+ISO/IEC 8632-1:1992	Part 1: Functional specification
+	Amd.1:1994	Amendment 1: Rules for profiles
+	Amd.2:1995	Amendment 2: Application structuring extensions
+	:1999		Status: Last review 2016 and current version
+
+ISO/IEC 8632-2:1992	Part 2: Character encoding
+	Amd.1:1994	Amendment 1: Rules for profiles
+	Amd.2:1995	Amendment 2: Application structuring extensions
+	:1992		Status: Withdrawn
+
+ISO/IEC 8632-3:1992	Part 3: Binary encoding
+	Amd.1:1994	Amendment 1: Rules for profiles
+	Amd.2:1995	Amendment 2: Application structuring extensions
+	:1999		Status: Last review 2016 and current version
+
+
+ISO/IEC 8632-4:1992	Part 4: Clear text encoding
+	Amd.1:1994	Amendment 1: Metafile for the storage and transfer of picture description information
+	Amd.2:1995	Amendment 2: Application structuring extensions
+	:1999		Status: Last review 2016 and current version

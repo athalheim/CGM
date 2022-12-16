@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CGM Binary Format Reader</title>
+        <script type="text/javascript" src="js/cgm.js"></script>
+        <script type="text/javascript" src="js/cgmRead.js"></script>
+        <script type="text/javascript" src="js/cgmClassesData.js"></script>
+        <style type="text/css">
+            html, body {
+                margin:         0px;
+                padding:        0px;
+            }
+            .top {
+                position:       absolute;
+                top:            0;
+                height:         200px;
+                width:          100%;
+            }
+            .bottom {
+                position:       absolute;
+                top:            220px;
+                bottom:         0;
+                width:          100%;
+                overflow:       auto;
+            }
+            td {
+                vertical-align: top;
+            }
+        </style>
+     </head>
+    <body>
+        <table class="top" style="background-color:lightgrey;">
+            <caption style="width:100%;background-color:grey;"><b>Computer Graphics Metafile (CGM) Translator</b></caption>
+            <thead>
+                <tr><td colspan="7" style="text-align:center;">This code covers the translation of CGM <b>binary format</b> data into <b>clear text format</b> using plain Javascript.<br/>Albert M Thalheim, 2022</td></tr>
+                <tr>
+                    <td colspan="3">
+                        According to specifications (provided with this code):<br/>
+                        <a href="specification/ISO IEC 8632-1:1999(E).pdf">ISO/IEC 8632-1:1999(E) Part 1: Functional specification</a><br/>
+                        <a href="specification/ISO IEC 8632-3:1999(E).pdf">ISO/IEC 8632-3:1999(E) Part 3: Binary encoding</a><br/>
+                        <a href="specification/ISO IEC 8632-4:1999(E).pdf">ISO/IEC 8632-4:1999(E) Part 4: Clear text encoding</a>
+                    </td>
+                    <th>Enjoy!</th>
+                    <td colspan="3" style="text-align:right;">
+                        Validated using examples (provided with this code) from:<br/>
+                        <a href ="http://www.agocg.ac.uk/train/cgm/examples/cgmindex.htm">agocg.ac.uk</a><br/>
+                        <a href="http://docs.oasis-open.org/webcgm/test-materials/webcgm21ts/webcgm21-ts-index.html">oasis-open.org</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><br/><input type="button" id="previous"  value="Previous"  onclick="getPreviousOption();" onselect="" disabled="disabled" title="Previous file in active list"></th>
+                    <th>
+                        <label for="examples_agocg">agocg</label><br/>
+                        <select name="cgmFile" id="examples_agocg" onchange="selectOption(this.id)">
+                            <option selected disabled>...Select...</option>
+                            <option>allbez.cgm</option>
+                            <option>allher.cgm</option>
+                            <option>allprims-00byteRemovedAt4C8.cgm</option>
+                            <option>allprims.cgm</option>
+                            <option>allps.cgm</option>
+                            <option>ca.cgm</option>
+                            <option>cells.cgm</option>
+                            <option>circles.cgm</option>
+                            <option>circuit.cgm</option>
+                            <option>corvette.cgm</option>
+                            <option>ellipse.cgm</option>
+                            <option>heart.cgm</option>
+                            <option>lines.cgm</option>
+                            <option>marks2.cgm</option>
+                            <option>marks.cgm</option>
+                            <option>nasa.cgm</option>
+                            <option>ncc-1700.cgm</option>
+                            <option>sammie.cgm</option>
+                            <option>segs.cgm</option>
+                            <option>techdraw.cgm</option>
+                            <option>text.cgm</option>
+                            <option>uniras.cgm</option>
+                        </select>
+                    </th>
+                    <th>
+                        <label for="examples_webcgm/20tests">oasis-open 20tests</label><br/>
+                        <select name="cgmFile" id="examples_webcgm/20tests" onchange="selectOption(this.id)">
+                            <option selected disabled>...Select...</option>
+                            <option>AppAttContent.cgm</option>
+                            <option>AppStructure-interactivity.cgm</option>
+                            <option>AppStructure-layerdesc.cgm</option>
+                            <option>AppStructure-layername.cgm</option>
+                            <option>AppStructure-linkuri.cgm</option>
+                            <option>AppStructure-name.cgm</option>
+                            <option>AppStructure-region.cgm</option>
+                            <option>AppStructure-screentip.cgm</option>
+                            <option>AppStructure-viewcontext.cgm</option>
+                            <option>AppStructure-visibility2.cgm</option>
+                            <option>AppStructure-visibility.cgm</option>
+                            <option>CGM_Metafile.cgm</option>
+                            <option>gr-interactivity.cgm</option>
+                            <option>interpolated-interior-01.cgm</option>
+                            <option>interpolated-interior-02.cgm</option>
+                            <option>Node-aps.cgm</option>
+                            <option>Node-attr.cgm</option>
+                            <option>NodeList.cgm</option>
+                            <option>Node-metadata.cgm</option>
+                            <option>Node-ns.cgm</option>
+                            <option>Node-pict.cgm</option>
+                            <option>Node-text.cgm</option>
+                            <option>NUBS01.cgm</option>
+                            <option>NUBS02.cgm</option>
+                            <option>NURBS01.cgm</option>
+                            <option>NURBS02.cgm</option>
+                            <option>object_behaviors.cgm</option>
+                            <option>Picture-highlight.cgm</option>
+                            <option>region_clip.cgm</option>
+                            <option>StyleProperties-aps.cgm</option>
+                            <option>StyleProperties-picture.cgm</option>
+                            <option>StyleProperty-inherit.cgm</option>
+                            <option>Text-On-Path-cases.cgm</option>
+                            <option>transp01.cgm</option>
+                            <option>utf16-chinese-v10.cgm</option>
+                            <option>utf16-chinese-v20.cgm</option>
+                            <option>utf16-japanese-v10.cgm</option>
+                            <option>utf16-sf-apsid-01.cgm</option>
+                            <option>utf16-sf-name-01.cgm</option>
+                            <option>utf8-chinese-v10.cgm</option>
+                            <option>utf8-chinese-v20.cgm</option>
+                            <option>WebCGM_Event.cgm</option>
+                            <option>xcf-styles.cgm</option>
+                        </select>
+                    </th>
+                    <th>
+                        <label for="examples_webcgm/21tests">oasis-open 21tests</label><br/>
+                        <select name="cgmFile" id="examples_webcgm/21tests" onchange="selectOption(this.id)">
+                            <option selected disabled>...Select...</option>
+                            <option>aciDefaultFont.cgm</option>
+                            <option>aciEdgeAttr.cgm</option>
+                            <option>aciFontNormalization.cgm</option>
+                            <option>aciForceSubstitution.cgm</option>
+                            <option>aciGenericFonts.cgm</option>
+                            <option>aciLineAttr.cgm</option>
+                            <option>aciLineEdgeTypeDef.cgm</option>
+                            <option>aciMapListOrder.cgm</option>
+                            <option>aciMitreLimit.cgm</option>
+                            <option>aciRestrictedTextType.cgm</option>
+                            <option>aciSimpleFontSubstitution.cgm</option>
+                            <option>alphaEscape.cgm</option>
+                            <option>getObjectExtent.cgm</option>
+                            <option>getObjectExtentTransformed.cgm</option>
+                            <option>lineAnimation.cgm</option>
+                            <option>lineOffset.cgm</option>
+                            <option>rotateAnimation.cgm</option>
+                            <option>rotateAPS.cgm</option>
+                            <option>scaleAPS.cgm</option>
+                            <option>setGetBGColor.cgm</option>
+                            <option>setGetEdgeVisibility.cgm</option>
+                            <option>setGetFillOffset2.cgm</option>
+                            <option>setGetFillStyles2.0.cgm</option>
+                            <option>setGetHatchIndex.cgm</option>
+                            <option>setGetInteriorStyle.cgm</option>
+                            <option>setGetLineStyles2.0.cgm</option>
+                            <option>setGetPatternIndex.cgm</option>
+                            <option>setGetStrokeOffset.cgm</option>
+                            <option>setGetStrokeType.cgm</option>
+                            <option>setGetTextStyles.cgm</option>
+                            <option>setRedraw001.cgm</option>
+                            <option>setRedraw002.cgm</option>
+                            <option>setView001.cgm</option>
+                            <option>setView002.cgm</option>
+                            <option>spXCF.cgm</option>
+                            <option>style.cgm</option>
+                            <option>subString.cgm</option>
+                            <option>transCellColor.cgm</option>
+                            <option>transformAnimation.cgm</option>
+                            <option>transformAPS.cgm</option>
+                            <option>translateAnimation.cgm</option>
+                            <option>translateAPS.cgm</option>
+                            <option>zCompress.cgm</option>
+                        </select>
+                    </th>
+                    <th>
+                        <label for="examples_webcgm/dynamic10">oasis-open dynamic10</label><br/>
+                        <select name="cgmFile" id="examples_webcgm/dynamic10" onchange="selectOption(this.id)">
+                            <option selected disabled>...Select...</option>
+                            <option>behavior-objHighlightAll-BE-06-target.cgm</option>
+                            <option>behavior-objHighlight-BE-05-target.cgm</option>
+                            <option>behavior-objViewContext-BE-07-target.cgm</option>
+                            <option>behavior-picBlankC2C-BE-01.cgm</option>
+                            <option>behavior-picBlankC2C-BE-01-target.cgm</option>
+                            <option>behavior-picBlankC2H-BE-03.cgm</option>
+                            <option>behavior-picReplaceC2C-BE-02.cgm</option>
+                            <option>behavior-picReplaceC2C-BE-02-target.cgm</option>
+                            <option>behavior-picTargetC2H-BE-04.cgm</option>
+                            <option>fragment-fiveForms-BE-03-target1.cgm</option>
+                            <option>fragment-fiveForms-BE-03-target2.cgm</option>
+                            <option>fragment-idC2H-BE-01.cgm</option>
+                            <option>interact-pick-BE-01.cgm</option>
+                            <option>interact-pickRegion-BE-02.cgm</option>
+                            <option>interact-screenTip-BE-03.cgm</option>
+                            <option>linking-anyURI-BE-07.cgm</option>
+                            <option>linking-anyURI-BE-07org.cgm</option>
+                            <option>linking-basicC2C-BE-03.cgm</option>
+                            <option>linking-basicC2C-BE-03-target.cgm</option>
+                            <option>linking-basicC2C-BE-03-target-old.cgm</option>
+                            <option>linking-basicC2H-BE-02.cgm</option>
+                            <option>linking-basicC2P-BE-04.cgm</option>
+                            <option>linking-basicH2C-BE-01-target.cgm</option>
+                            <option>linking-multiLink-BE-08.cgm</option>
+                            <option>linking-selectId-BE-05-target.cgm</option>
+                            <option>linking-selectName-BE-06-target.cgm</option>
+                            <option>otherAPS-para-BE-01.cgm</option>
+                            <option>otherAPS-para-BE-01-target.cgm</option>
+                            <option>otherAPS-para-BE-01-test.cgm</option>
+                            <option>otherAPS-para-BE-02.cgm</option>
+                            <option>otherAPS-para-BE-02-target.cgm</option>
+                        </select>
+                    </th>
+                    <th>
+                        <label for="examples_webcgm/static10">oasis-open static10</label><br/>
+                        <select name="cgmFile" id="examples_webcgm/static10" onchange="selectOption(this.id)">
+                            <option selected disabled>...Select...</option>
+                            <option>ALLELM01.cgm</option>
+                            <option>APNTXT01.cgm</option>
+                            <option>APNTXT02.cgm</option>
+                            <option>ARCFUL01.cgm</option>
+                            <option>ARCTST01.cgm</option>
+                            <option>ARCTST02.cgm</option>
+                            <option>ARCTST03.cgm</option>
+                            <option>ARCTST04.cgm</option>
+                            <option>ARCTST05.cgm</option>
+                            <option>ARCTST06.cgm</option>
+                            <option>BGCOLR01.cgm</option>
+                            <option>BGCOLR02.cgm</option>
+                            <option>BGCOLR03.cgm</option>
+                            <option>BGCOLR04.cgm</option>
+                            <option>BIGCGM01.cgm</option>
+                            <option>BIGCGM02.cgm</option>
+                            <option>BIGCGM03.cgm</option>
+                            <option>bigcgm04.cgm</option>
+                            <option>bigcgm05.cgm</option>
+                            <option>CELARY01.cgm</option>
+                            <option>CELARY02.cgm</option>
+                            <option>CELARY03.cgm</option>
+                            <option>CELARY04.cgm</option>
+                            <option>CELARY05.cgm</option>
+                            <option>CELARY06.cgm</option>
+                            <option>CELARY07.cgm</option>
+                            <option>CHRHGT01.cgm</option>
+                            <option>CHRHTLN.cgm</option>
+                            <option>CHRORI01.cgm</option>
+                            <option>CHRSET01.cgm</option>
+                            <option>CHRSET02.cgm</option>
+                            <option>CHRSPA01.cgm</option>
+                            <option>CIRARC01.cgm</option>
+                            <option>CIRARC02.cgm</option>
+                            <option>CIRARC03.cgm</option>
+                            <option>CIRCLE01.cgm</option>
+                            <option>CIRCLE02.cgm</option>
+                            <option>CIRCLE03.cgm</option>
+                            <option>CLIPNG01.cgm</option>
+                            <option>CLIPNG02.cgm</option>
+                            <option>CLIPNG03.cgm</option>
+                            <option>CLIPNG04.cgm</option>
+                            <option>CLIPNG05.cgm</option>
+                            <option>COLIPR01.cgm</option>
+                            <option>COLIPR02.cgm</option>
+                            <option>COLLVL01.cgm</option>
+                            <option>COLLVL02.cgm</option>
+                            <option>COLLVL03.cgm</option>
+                            <option>COLLVL04.cgm</option>
+                            <option>COLRMD01.cgm</option>
+                            <option>COLRMD02.cgm</option>
+                            <option>COLRPR01.cgm</option>
+                            <option>COLRPR02.cgm</option>
+                            <option>COLTAB01.cgm</option>
+                            <option>COLTAB02.cgm</option>
+                            <option>COLVAL01.cgm</option>
+                            <option>COLVAL02.cgm</option>
+                            <option>COLVAL03.cgm</option>
+                            <option>COLVAL04.cgm</option>
+                            <option>CRAR3C01.cgm</option>
+                            <option>CRAR3C02.cgm</option>
+                            <option>CRAR3C03.cgm</option>
+                            <option>CRARC301.cgm</option>
+                            <option>CRARC302.cgm</option>
+                            <option>CRARC303.cgm</option>
+                            <option>CRARCC01.cgm</option>
+                            <option>CRARCC02.cgm</option>
+                            <option>CRARCC03.cgm</option>
+                            <option>DEFVAL01.cgm</option>
+                            <option>DESORD01.cgm</option>
+                            <option>DGNTST01.cgm</option>
+                            <option>DGNTST02.cgm</option>
+                            <option>DGNTST03.cgm</option>
+                            <option>DGNTST04.cgm</option>
+                            <option>DGNTST05.cgm</option>
+                            <option>DGNTST06.cgm</option>
+                            <option>DIRCOL01.cgm</option>
+                            <option>DPLYLN01.cgm</option>
+                            <option>DGCOL01.cgm</option>
+                            <option>edgstl01.cgm</option>
+                            <option>ELARCC01.cgm</option>
+                            <option>ELARCC02.cgm</option>
+                            <option>ELARCC03.cgm</option>
+                            <option>ELARCC04.cgm</option>
+                            <option>ELARCC05.cgm</option>
+                            <option>ELLARC01.cgm</option>
+                            <option>ELLARC02.cgm</option>
+                            <option>ELLARC03.cgm</option>
+                            <option>ELLARC04.cgm</option>
+                            <option>ELLARC05.cgm</option>
+                            <option>ELLIPS01.cgm</option>
+                            <option>ELLIPS02.cgm</option>
+                            <option>ELLIPS03.cgm</option>
+                            <option>EMTPCT01.cgm</option>
+                            <option>EMTPCT02.cgm</option>
+                            <option>ESCAPE01.cgm</option>
+                            <option>ESCAPE02.cgm</option>
+                            <option>FIGURE01.cgm</option>
+                            <option>FIGURE02.cgm</option>
+                            <option>FIGURE03.cgm</option>
+                            <option>FIGURE04.cgm</option>
+                            <option>FIGURE05.cgm</option>
+                            <option>FIGURE06.cgm</option>
+                            <option>FIGURE07.cgm</option>
+                            <option>FNTLST01.cgm</option>
+                            <option>FNTLST02.cgm</option>
+                            <option>FNTLST03.cgm</option>
+                            <option>FNTLST04.cgm</option>
+                            <option>FNTLST05.cgm</option>
+                            <option>FNTLST06.cgm</option>
+                            <option>FNTLST07.cgm</option>
+                            <option>INTSTL01.cgm</option>
+                            <option>INTSTL02.cgm</option>
+                            <option>INTSTL03.cgm</option>
+                            <option>INTSTL04.cgm</option>
+                            <option>INTSTL05.cgm</option>
+                            <option>INTSTL06.cgm</option>
+                            <option>INTSTL07.cgm</option>
+                            <option>INTSTL08.cgm</option>
+                            <option>LINCAP01.cgm</option>
+                            <option>LINCAP02.cgm</option>
+                            <option>LINCOL01.cgm</option>
+                            <option>LINSTD01.cgm</option>
+                            <option>LINSTD02.cgm</option>
+                            <option>LINSTD03.cgm</option>
+                            <option>LINSTL01.cgm</option>
+                            <option>LINSTL02.cgm</option>
+                            <option>LINSTL03.cgm</option>
+                            <option>LINSTL04.cgm</option>
+                            <option>LINSTL05.cgm</option>
+                            <option>LINSTL06.cgm</option>
+                            <option>LINSTL07.cgm</option>
+                            <option>LINSTL08.cgm</option>
+                            <option>LINSTL09.cgm</option>
+                            <option>LINSTL10.cgm</option>
+                            <option>LINSTL11.cgm</option>
+                            <option>LINSTL12.cgm</option>
+                            <option>LINSTL13.cgm</option>
+                            <option>LINSTL14.cgm</option>
+                            <option>LINSTL15.cgm</option>
+                            <option>LNJOIN01.cgm</option>
+                            <option>MDRTST01.cgm</option>
+                            <option>MDRTST02.cgm</option>
+                            <option>MFDESC01.cgm</option>
+                            <option>MFELLS01.cgm</option>
+                            <option>MFELLS02.cgm</option>
+                            <option>MITRLM01.cgm</option>
+                            <option>NOGTXT01.cgm</option>
+                            <option>PATTBL01.cgm</option>
+                            <option>PATTBL02.cgm</option>
+                            <option>PLGSET01.cgm</option>
+                            <option>PLGSET02.cgm</option>
+                            <option>PLGSET03.cgm</option>
+                            <option>PLGSET04.cgm</option>
+                            <option>PLGSET05.cgm</option>
+                            <option>PLGSET06.cgm</option>
+                            <option>polybz01.cgm</option>
+                            <option>polybz02.cgm</option>
+                            <option>polybz03.cgm</option>
+                            <option>polyBZ04.cgm</option>
+                            <option>polyBZ05.cgm</option>
+                            <option>polyBZ06.cgm</option>
+                            <option>polyGN01.cgm</option>
+                            <option>polyGN02.cgm</option>
+                            <option>polyGN03.cgm</option>
+                            <option>polyGN04.cgm</option>
+                            <option>polyLN01.cgm</option>
+                            <option>polyLN02.cgm</option>
+                            <option>polyLN03.cgm</option>
+                            <option>polyLN04.cgm</option>
+                            <option>polyMK01.cgm</option>
+                            <option>polyMK02.cgm</option>
+                            <option>polyMK03.cgm</option>
+                            <option>RCTNGL01.cgm</option>
+                            <option>RCTNGL02.cgm</option>
+                            <option>REALPR01.cgm</option>
+                            <option>REALPR02.cgm</option>
+                            <option>RESTXT01.cgm</option>
+                            <option>RESTXT02.cgm</option>
+                            <option>ROTTXT01.cgm</option>
+                            <option>ROTTXT02.cgm</option>
+                            <option>SCHEMA01.cgm</option>
+                            <option>SCHEMA02.cgm</option>
+                            <option>SCHEMA03.cgm</option>
+                            <option>SCHEMA04.cgm</option>
+                            <option>SCHEMA05.cgm</option>
+                            <option>>SCLMOD01.cgm</option>
+                            <option>SPECMD01.cgm</option>
+                            <option>SPECMD02.cgm</option>
+                            <option>SPECMD03.cgm</option>
+                            <option>SPECMD04.cgm</option>
+                            <option>SPECMD05.cgm</option>
+                            <option>TABTNL01.cgm</option>
+                            <option>TABTNL02.cgm</option>
+                            <option>TXTALN01.cgm</option>
+                            <option>TXTALN02.cgm</option>
+                            <option>TXTALN03.cgm</option>
+                            <option>TXTALN04.cgm</option>
+                            <option>TXTALN05.cgm</option>
+                            <option>TXTALN06.cgm</option>
+                            <option>TXTALN07.cgm</option>
+                            <option>TXTALN08.cgm</option>
+                            <option>TXTALN09.cgm</option>
+                            <option>TXTALN10.cgm</option>
+                            <option>TXTALN11.cgm</option>
+                            <option>TXTALN12.cgm</option>
+                            <option>TXTALN13.cgm</option>
+                            <option>TXTALN14.cgm</option>
+                            <option>TXTALN15.cgm</option>
+                            <option>TXTALN16.cgm</option>
+                            <option>TXTALN17.cgm</option>
+                            <option>TXTALN18.cgm</option>
+                            <option>TXTALN19.cgm</option>
+                            <option>TXTALN20.cgm</option>
+                            <option>TXTALN21.cgm</option>
+                            <option>TXTALN22.cgm</option>
+                            <option>TXTALN23.cgm</option>
+                            <option>TXTCOL01.cgm</option>
+                            <option>TXTLEN01.cgm</option>
+                            <option>TXTPTH01.cgm</option>
+                            <option>TXTPTH02.cgm</option>
+                            <option>TXTPTH03.cgm</option>
+                            <option>VDCEXT01.cgm</option>
+                            <option>VDCEXT02.cgm</option>
+                            <option>VDCEXT03.cgm</option>
+                            <option>VDCEXT04.cgm</option>
+                            <option>VDCEXT05.cgm</option>
+                            <option>VDCEXT06.cgm</option>
+                            <option>VDCEXT07.cgm</option>
+                            <option>VDCINT01.cgm</option>
+                            <option>VDCRPR01.cgm</option>
+                            <option>VDCRPR02.cgm</option>
+                            <option>ZEROSZ01.cgm</option>
+                        </select>
+                    </th>
+                    <th><br/><input type="button" id="next"  value="Next"  onclick = "getNextOption();" disabled="disabled" title="Next file in active list"></th>
+                </tr>
+                <tr>
+                    <th colspan="2">&nbsp;</th>
+                    <th id="errorCount"      style="background-color:red;"       title="Errors count"></th>
+                    <th id="graphicCount"    style="background-color:lightBlue;" title="Graphic elements count"></th>
+                    <th id="complianceCount" style="background-color:yellow;"    title="No-Compliance count"></th>
+                    <th colspan="2">&nbsp;</th>
+                </tr>
+            </thead>
+        </table>
+        <div class="bottom" id="codesDiv">&#160;</div>
+    </body>
+    <script type="text/javascript">
+        urlBase                                                  = location.href.substring(0, location.href.lastIndexOf("/") + 1)
+        thisSelect                                               = null
+        thisOption                                               = null;
+        thisGroup                                                = null;
+            // Initialize all '...Select...' elements
+        selectElements                                           = document.getElementsByTagName('select');
+        selectElementsArray                                      = Array.prototype.slice.call(selectElements);
+        selectElementsArray.forEach(thisSelect => thisSelect.selectedIndex = 0);
+
+        function getPreviousOption() {
+            thisSelect.selectedIndex                            -= 1;
+            selectOption();
+        }
+        function getNextOption() {
+            thisSelect.selectedIndex                            += 1;
+            selectOption();
+        }
+        function selectOption(selectId) {
+                // When selecting a list
+            if (selectId) {
+                    // Check for previous list
+                if (thisSelect) {
+                        // Reset previous list and remove highlight
+                    if (thisSelect.id !== selectId) {
+                        thisSelect.selectedIndex                 = 0;
+                        thisSelect.style.backgroundColor         = document.body.style.backgroundColor;
+                    }
+                }
+                    // Select and highlight list
+                thisSelect                                       = document.getElementById(selectId);
+                thisSelect.style.backgroundColor                 = "orange";
+            }
+            thisOption = thisSelect.options[thisSelect.selectedIndex];
+                // Previous file:
+            document.getElementById("previous").disabled              = (thisSelect.selectedIndex <= 1);
+            document.getElementById("previous").style.backgroundColor = (thisSelect.selectedIndex <= 1)? '': 'green';
+                // Next file:
+            document.getElementById("next"    ).disabled              = (!thisOption.nextElementSibling);
+            document.getElementById("next"    ).style.backgroundColor = (thisOption.nextElementSibling)? 'green': '';
+                // Load selected file
+            document.getElementById("codesDiv").innerHTML        = '...Loading... Please wait...';
+            cgm.getFile(urlBase + thisSelect.id + '/' + thisOption.value);
+        }
+
+            // Initialize event: Callback from 'cgm' module 'getBytes' procedure
+            //  Create the event
+        cgmInitialized                                           = new CustomEvent('cgmInitialized', null);
+            //  Add an event listener
+        document.addEventListener("cgmInitialized", function(e) {
+            errorNames                                           = [];
+            errorCount                                           = 0;
+            noComplyCount                                        = 0;
+            graphicCount                                         = 0;
+                // Codes data
+            document.getElementById("codesDiv").innerHTML        = '';
+            cgm.codes.forEach(classCodeData => {
+                textStyle                                        = '';
+                if (classCodeData.parameters.indexOf('Error') > -1) { 
+                    errorCount                                  += 1;
+                    if (!errorNames.includes(classCodeData.text)) {
+                        errorNames.push(classCodeData.text);
+                    }
+                    textStyle                                    = ' background-color:red;';
+                } else{
+                    if (!classCodeData.complyToVersion) {
+                        textStyle                                = ' background-color:yellow;';
+                        noComplyCount                           += 1;
+                    }
+                    if (classCodeData.isGraphic) {
+                        textStyle                                = ' background-color:lightBlue;';
+                        graphicCount                            += 1;
+                    }
+                }
+                document.getElementById("codesDiv").innerHTML   += '<div style="text-align:left;' + textStyle + '">' + classCodeData.text + classCodeData.parameters + '</div>'
+            });
+                // File data:
+            if (errorCount > 0) {
+                document.getElementById("errorCount").innerHTML  =  "Errors: "     + errorCount;
+                document.getElementById("errorCount").onclick    = function() { alert(errorNames.join(',')); };
+            } else {
+                document.getElementById("errorCount").innerHTML  = '';
+                delete document.getElementById("errorCount").onclick;
+            }
+            document.getElementById("graphicCount").innerHTML    =  "Graphic: "    + graphicCount;
+            if (noComplyCount > 0) {
+                document.getElementById("complianceCount").innerHTML =  "No Compliance: " + noComplyCount;
+            } else {
+                document.getElementById("complianceCount").innerHTML = '';
+            }
+        });
+    </script>
+</html>
+
+<!-- -\\- -->
