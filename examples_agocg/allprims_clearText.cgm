@@ -1,0 +1,573 @@
+BegMF "CTN-01Id";                                     % 91-10-03 11:00 % 
+  MFVersion 1; 
+  MFDesc "CTN-01Id, 94-04-12.h, MIL-D-28003A/BASIC-1 "; 
+  MFElemList "DRAWINGPLUS";                                 
+  ApplData -8199 "Amended for publication at Henderson Software, April 1994";
+  VDCType INTEGER;                                          
+  IntegerPrec -32768, 32768;                                
+  ColrPrec 255;                                             
+  ColrIndexPrec 255;                                        
+  MaxColrIndex 255;         % LRH -- this preceded ColrPrec, fixed 4/94 %
+  FontList 
+     "HERSHEY:SIMPLEX_ROMAN" 
+     "HERSHEY:DUPLEX_ROMAN" 
+     "HERSHEY:COMPLEX_ROMAN";                         
+ 
+BegPic "All Graphical Primitive Elements";                  
+  ColrMode INDEXED;                                         
+  LineWidthMode SCALED;                                     
+  MarkerSizeMode SCALED;                                    
+  EdgeWidthMode SCALED;                                     
+  VDCExt 0,0,32767, 32767;                                  
+  BackColr 255 255 255;    % white %                         
+ 
+  % MODE SUMMARY ----------------------------------------------------------- % 
+  %          COLOUR     LINE WIDTH     MARKER SIZE    EDGE WIDTH             % 
+  % SCALING  SELECTION  SPECIFICATION  SPECIFICATION  SPECIFICATION          % 
+  % default  INDEXED    SCALED         SCALED         SCALED                 %  
+ 
+BegPicBody;  
+
+  TextPrec stroke;         %*** LRH Mod, 1/10/94 ***%
+
+  ColrTable  0             % index  color   % 
+             255 255 255   %   0    white   % 
+               0   0   0   %   1    black   % 
+             255   0   0   %   2    red     % 
+               0 255   0   %   3    green   % 
+               0   0 255   %   4    blue    % 
+             255 255   0   %   5    yellow  % 
+             255   0 255   %   6    magenta % 
+               0 255 255   %   7    cyan    % 
+             255 255 255   %   8    white   % 
+             255 155   0;  %   9    orange  % 
+ 
+  % Box Grid %  
+  EdgeVis ON;  
+  EdgeWidth 2.0; 
+  LineType 1;  
+  LineWidth 2.0; 
+  LineColr 1;  
+  % box and horizontal grid lines %                                                    
+  % LINE Parameter Summary ------------------------------------------------- % 
+  % BUNDLE   LINE   LINE   LINE                                              % 
+  % INDEX    TYPE   WIDTH  COLOUR                                            %
+  % default  set    set    set                                               %
+  % 1        1      3.0    2 black                                           % 
+  % ------------------------------------------------------------------------ % 
+  Line (1,1) (1,32766) (32766,32766) (32766,1) (1,1); 
+  Line (1,22937) (32766,22937);                       
+  Line (1,13107) (32766,13107);                       
+  Line (1,3277) (32766,3277);                         
+ 
+  % vertical grid lines %
+  Line (5461,3277) (5461,32766);                      
+  Line (10922,3277) (10922,32766);                    
+  Line (16384,3277) (16384,32766);                    
+  Line (21845,0) (21845,32766);                       
+  Line (27306,3277) (27306,32766);                    
+ 
+% Elements % 
+ 
+% Box  1 - POLYLINE %
+  LineWidth 4.0; 
+  LineColr 2;  
+  % LINE Parameter Summary ------------------------------------------------- % 
+  % BUNDLE   LINE   LINE   LINE                                              % 
+  % INDEX    TYPE   WIDTH  COLOUR                                            % 
+  % default  set    set    set                                               % 
+  % 1        1      4.0    2 red                                             % 
+  % ------------------------------------------------------------------------ % 
+  Line (655,26869)  (4806,32112) (4806,30801) 
+       (3386,32112) (2021,32112) (4806,29490) 
+       (4806,28180) (655,32112)  (655,30801) 
+       (4806,26869) (3386,26869) (655,29490) 
+       (655,28180)  (2021,26869); 
+ 
+% Box  2 - DISJOINT POLYLINE %
+  LineWidth 3.0; 
+  LineColr 3;  
+  % LINE Parameter Summary ------------------------------------------------- % 
+  % BUNDLE   LINE   LINE   LINE                                              % 
+  % INDEX    TYPE   WIDTH  COLOUR                                            % 
+  % default  set    set    set                                               % 
+  % 1        1      3.0    3 green                                           % 
+  % ------------------------------------------------------------------------ % 
+  DisjtLine (10267,26869) (6117,32112) (6117,30801) (7482,32112) 
+            (8847,32112)  (6117,29490) (6117,28180) (10267,32112) 
+            (10267,30801) (6117,26869) (7482,26869) (10267,29490) 
+            (10267,28180) (8847,26869); 
+ 
+% Box  3 - POLYMARKER %
+  MarkerType 1; 
+  MarkerSize 1.0;
+  MarkerColr 1; 
+  % MARKER PARAMETER SUMMARY ----------------------------------------------- % 
+  % BUNDLE                                                                   %
+  % INDEX        TYPE  SIZE  COLOUR                                          % 
+  % default = 1  1     1.0   1 black                                         % 
+  % ------------------------------------------------------------------------ % 
+  Marker (11468,32112); 
+ 
+  MarkerType 2; 
+  MarkerSize 2.0;
+  MarkerColr 2; 
+  % MARKER PARAMETER SUMMARY ----------------------------------------------- % 
+  % BUNDLE                                                                   %
+  % INDEX        TYPE  SIZE  COLOUR                                          % 
+  % default = 1  2     2.0   2 red                                           % 
+  % ------------------------------------------------------------------------ % 
+  Marker (12451,30801); 
+ 
+  MarkerType 3; 
+  MarkerSize 3.0;
+  MarkerColr 3; 
+  % MARKER PARAMETER SUMMARY ----------------------------------------------- % 
+  % BUNDLE                                                                   %
+  % INDEX        TYPE  SIZE  COLOUR                                          % 
+  % default = 1  3     3.0   3 green                                         % 
+  % ------------------------------------------------------------------------ % 
+  Marker (13434,29490); 
+ 
+  MarkerType 4; 
+  MarkerSize 2.0;
+  MarkerColr 4; 
+  % MARKER PARAMETER SUMMARY ----------------------------------------------- % 
+  % BUNDLE                                                                   %
+  % INDEX        TYPE  SIZE  COLOUR                                          % 
+  % default = 1  4     2.0   4 blue                                          % 
+  % ------------------------------------------------------------------------ % 
+  Marker (14417,28180); 
+ 
+  MarkerType 5; 
+  MarkerSize 1.0;
+  MarkerColr 6; 
+  % MARKER PARAMETER SUMMARY ----------------------------------------------- % 
+  % BUNDLE                                                                   %
+  % INDEX        TYPE  SIZE  COLOUR                                          % 
+  % default = 1  5     1.0   6 magenta                                       % 
+  % ------------------------------------------------------------------------ % 
+  Marker (15400,26869); 
+ 
+% Box  4 - TEXT %
+  TextFontIndex 1;
+  TextColr 6;
+  CharHeight 655; 
+  CharExpan 0.8; 
+  CharSpace 0.25; 
+  CharOri 0,1,1,0; 
+  % TEXT PARAMETER SUMMARY ------------------------------------------------------------------------------------- % 
+  % BUNDLE   FONT   TEXT       EXPAN   CHAR.  TEXT       CHAR.   CHAR.     TEXT     TEXT     CHAR SET  ALT CHAR  %
+  % INDEX    INDEX  PRECISION  FACTOR  SPACE  COLOUR     HEIGHT  ORIENT    PATH     ALIGN    INDEX     SET INDEX %
+  % default  set    default    set     set    set        set     set       default  default  default   default   % 
+  % 1        1      1          0.8     0.25   6 magenta  655     0,1,1,0   right    normal   1         1         %
+  % ------------------------------------------------------------------------------------------------------------ % 
+  Text 17039,26869,final,".ABCD"; 
+ 
+  TextColr 9;
+  CharOri -1,1,1,1; 
+  % TEXT PARAMETER SUMMARY ------------------------------------------------------------------------------------- % 
+  % BUNDLE   FONT   TEXT       EXPAN   CHAR.  TEXT       CHAR.   CHAR.     TEXT     TEXT     CHAR SET  ALT CHAR  %
+  % INDEX    INDEX  PRECISION  FACTOR  SPACE  COLOUR     HEIGHT  ORIENT    PATH     ALIGN    INDEX     SET INDEX %
+  % default  set    default    set     set    set        set     set       default  default  default   default   % 
+  % 1        1      1          0.8     0.25   9 orange   655     -1,1,1,1  right    normal   1         1         %
+  % ------------------------------------------------------------------------------------------------------------ % 
+  Text 17039,27852,final,".ABCD"; 
+ 
+  TextColr 7;
+  CharOri 0,1,1,0; 
+  TextPath LEFT; 
+  % TEXT PARAMETER SUMMARY ------------------------------------------------------------------------------------- % 
+  % BUNDLE   FONT   TEXT       EXPAN   CHAR.  TEXT       CHAR.   CHAR.     TEXT     TEXT     CHAR SET  ALT CHAR  %
+  % INDEX    INDEX  PRECISION  FACTOR  SPACE  COLOUR     HEIGHT  ORIENT    PATH     ALIGN    INDEX     SET INDEX %
+  % default  set    default    set     set    set        set     set       set      default  default   default   % 
+  % 1        1      1          0.8     0.25   7 cyan     655     0,1,1,0   LEFT     normal   1         1         %
+  % ------------------------------------------------------------------------------------------------------------ % 
+  Text 20971,31456,final,"LEFT"; 
+ 
+  TextColr 4;
+  TextPath DOWN; 
+  % TEXT PARAMETER SUMMARY ------------------------------------------------------------------------------------- % 
+  % BUNDLE   FONT   TEXT       EXPAN   CHAR.  TEXT       CHAR.   CHAR.     TEXT     TEXT     CHAR SET  ALT CHAR  %
+  % INDEX    INDEX  PRECISION  FACTOR  SPACE  COLOUR     HEIGHT  ORIENT    PATH     ALIGN    INDEX     SET INDEX %
+  % default  set    default    set     set    set        set     set       set      default  default   default   % 
+  % 1        1      1          0.8     0.25   4 blue     655     0,1,1,0   DOWN     normal   1         1         %
+  % ------------------------------------------------------------------------------------------------------------ % 
+  Text 20971,31456,final,"DOWN"; 
+ 
+% Box  5 - RESTRICTED TEXT %
+  LineType 1;     
+  IntStyle EMPTY; 
+  TextColr 4;     
+%*** was 655 ***%
+  CharHeight 655;
+  TextPath RIGHT; 
+  % CLOSED FIGURE PARAMETER SUMMARY ------------------------------------------------------------------ % 
+  % INTERIOR  FILL       HATCH      PATTERN    EDGE     EDGE     EDGE     EDGE       EDGE     FILL REF %
+  % STYLE     COLOUR     INDEX      INDEX      BUNDLE   TYPE     WIDTH    COLOUR     VISIBIL. POINT    %
+  % EMPTY     set        default    default    INDEX    default  default             set      default  % 
+  %           4 blue     1 =        1          def = 1  1                            on       ll corn  %
+  % -------------------------------------------------------------------------------------------------- % 
+  Rect 22282,26869,26869,27524;
+  Rect 22282,28180,25558,29490; 
+  Rect 22282,30146,24248,32112; 
+ 
+  % TEXT PARAMETER SUMMARY ------------------------------------------------------------------------------------- % 
+  % BUNDLE   FONT   TEXT       EXPAN   CHAR.  TEXT       CHAR.   CHAR.     TEXT     TEXT     CHAR SET  ALT CHAR  %
+  % INDEX    INDEX  PRECISION  FACTOR  SPACE  COLOUR     HEIGHT  ORIENT    PATH     ALIGN    INDEX     SET NDX   %
+  % default  set    default    set     set    set        set     set       set      default  default   default   % 
+  % 1        1      1          0.8     0.25   4 blue     655     0,1,1,0   RIGHT    normal   1         1         %
+  % ------------------------------------------------------------------------------------------------------------ % 
+  RestrText 4587,655,22282,26869,final,"AbCdEfGhIjK"; 
+  RestrText 3277,1310,22282,28180,final,"AbCdEfGhIjK"; 
+  RestrText 1966,1966,22282,30146,final,"AbCdEfGhIjK"; 
+ 
+% Box  6 - APPEND TEXT %
+  TextFontIndex 2; 
+  TextColr 2; 
+  CharHeight 666; 
+  CharExpan 0.8; 
+  CharSpace 0.10; 
+  CharOri 0,1,1,0; 
+  % TEXT PARAMETER SUMMARY ------------------------------------------------------------------------------------- % 
+  % BUNDLE   FONT   TEXT       EXPAN   CHAR.  TEXT       CHAR.   CHAR.     TEXT     TEXT     CHAR SET  ALT CHAR  %
+  % INDEX    INDEX  PRECISION  FACTOR  SPACE  COLOUR     HEIGHT  ORIENT    PATH     ALIGN    INDEX     SET NDX   %
+  % default  2      default    0.8     0.10   2 red      666     0,1,1,0   RIGHT    default  default   default   % 
+  % 1               1                                                               normal   1         1         %
+  % ------------------------------------------------------------------------------------------------------------ % 
+  Text 27961,27852,notfinal,".ABC"; 
+ 
+  TextFontIndex 3; 
+  TextColr 4; 
+  CharHeight 1000; 
+  % TEXT PARAMETER SUMMARY ------------------------------------------------------------------------------------- % 
+  % BUNDLE   FONT   TEXT       EXPAN   CHAR.  TEXT       CHAR.   CHAR.     TEXT     TEXT     CHAR SET  ALT CHAR  %
+  % INDEX    INDEX  PRECISION  FACTOR  SPACE  COLOUR     HEIGHT  ORIENT    PATH     ALIGN    INDEX     SET NDX   %
+  % default  set    default    set     set    set        set     set       set      default  default   default   % 
+  % 1        3      1          0.8     0.10   4 blue     1000    0,1,1,0   right    normal   1         1         %
+  % ------------------------------------------------------------------------------------------------------------ % 
+
+  CharExpan 0.6;         %*** LRH Mod, 2/12/93 ***%
+  ApndText final,"+D"; 
+ 
+% Box  7 - POLYGON %
+  EdgeWidth 2.0; 
+  EdgeColr 4; 
+  IntStyle SOLID; 
+  HatchIndex 1; 
+  FillColr 5; 
+  % CLOSED FIGURE PARAMETER SUMMARY -------------------------------------------------------------------------------------- % 
+  % INTERIOR  FILL       HATCH      PATTERN    EDGE     EDGE     EDGE     EDGE       EDGE     FILL REF CHAR SET  ALT CHAR  %
+  % STYLE     COLOUR     INDEX      INDEX      BUNDLE   TYPE     WIDTH    COLOUR     VISIBIL. POINT    INDEX     SET NDX   %
+  % set       set        set        default    INDEX    default  set      set        set      default  default   default   % 
+  % SOLID     5 yellow   1 =        1          def = 1  1        2.0      4 blue     on       ll corn  1         1         %
+  % ---------------------------------------------------------------------------------------------------------------------- % 
+  Polygon (655,17039) (2731,22282) (4587,17039); 
+ 
+% Box  8 - POLYGON SET %
+  IntStyle HATCH; 
+  FillColr 2; 
+  HatchIndex 2; 
+  EdgeWidth 1.0; 
+  EdgeColr 1; 
+  % CLOSED FIGURE PARAMETER SUMMARY -------------------------------------------------------------------------------------- % 
+  % INTERIOR  FILL       HATCH      PATTERN    EDGE     EDGE     EDGE     EDGE       EDGE     FILL REF CHAR SET  ALT CHAR  %
+  % STYLE     COLOUR     INDEX      INDEX      BUNDLE   TYPE     WIDTH    COLOUR     VISIBIL. POINT    INDEX     SET NDX   %
+  % set       set        set        default    INDEX    default  set      set        set      default  default   default   % 
+  % HATCH     2 red      2 |||      1          def = 1  1        1.0      1 black    on       ll corn  1         1         %
+  % ---------------------------------------------------------------------------------------------------------------------- % 
+  PolygonSet (6117,17039),vis,
+             (7536,21626),vis,
+             (9502,22282),invis,
+             (10485,17039),closevis,
+             (7373,18350),vis,
+             (6117,22282),vis,
+             (9502,18022),closevis;  % LRH -- unmatched parens fixed, 4/94 %
+ 
+% Box  9 - CELL ARRAY %
+  CellArray                                                 
+  %     P            Q            R       nx  ny   CI   %
+  (12468,22282)(14500,17039)(15728,22282)  9  10  255 % black/white array  %
+    2    0    3    0    4    0    5    0    6           % 1 0 1 0 1 0 1 0 1  %
+    0    7    8    0    0    2    2    0    0           % 0 1 1 0 0 1 1 0 0  %
+    3    7    8    0    0    0    4    2    2           % 1 1 1 0 0 0 1 1 1  %
+    3    0    2    2    0    7    0    0    7           % 1 0 1 1 0 1 0 0 1  %
+    3    0    3    0    4    0    6    0    6           % 1 0 1 0 1 0 1 0 1  %
+    0    2    0    3    0    6    6    0    7           % 0 1 0 1 0 1 1 0 1  %
+    0    3    0    0    5    0    6    3    0           % 0 1 0 0 1 0 1 1 0  %
+    0    4    4    0    5    3    0    4    5           % 0 1 1 0 1 1 0 1 1  %
+    0    5    5    0    0    3    4    0    7           % 0 1 1 0 0 1 1 0 1  %
+    0    6    6    0    0    3    5    0    0;          % 0 1 1 0 0 1 1 0 0; %
+
+                %  LRH -- invalid Local Colour Precision fixed -- 4/94 %
+
+% Box 10 not used; GDP not in MIL-D-28003  %  
+ 
+% Box 11 - RECTANGLE %
+  FillColr 6; 
+  HatchIndex 3; 
+  EdgeWidth 10.0; 
+  EdgeColr 7; 
+  % CLOSED FIGURE PARAMETER SUMMARY -------------------------------------------------------------------------------------- % 
+  % INTERIOR  FILL       HATCH      PATTERN    EDGE     EDGE     EDGE     EDGE       EDGE     FILL REF CHAR SET  ALT CHAR  %
+  % STYLE     COLOUR     INDEX      INDEX      BUNDLE   TYPE     WIDTH    COLOUR     VISIBIL. POINT    INDEX     SET NDX   %
+  % set       set        set        default    INDEX    default  set      set        set      default  default   default   % 
+  % HATCH     6 magenta  3 ///      1          def = 1  1        10.0     7 cyan     on       ll corn  1         1         %
+  % ---------------------------------------------------------------------------------------------------------------------- % 
+  Rect (17039,17039) (21189,22282);   
+ 
+% Box 12 - CIRCLE %
+  FillColr 4; 
+  HatchIndex 4; 
+  EdgeWidth 4.0; 
+  EdgeColr 3; 
+  % CLOSED FIGURE PARAMETER SUMMARY -------------------------------------------------------------------------------------- % 
+  % INTERIOR  FILL       HATCH      PATTERN    EDGE     EDGE     EDGE     EDGE       EDGE     FILL REF CHAR SET  ALT CHAR  %
+  % STYLE     COLOUR     INDEX      INDEX      BUNDLE   TYPE     WIDTH    COLOUR     VISIBIL. POINT    INDEX     SET NDX   %
+  % set       set        set        default    INDEX    default  set      set        set      default  default   default   % 
+  % HATCH     4 blue     4 \\\      1          def = 1  1        4.0      3 green    on       ll corn  1         1         %
+  % ---------------------------------------------------------------------------------------------------------------------- % 
+  Circle (24575,19660),2458; 
+ 
+% Box 13 - CIRCULAR ARC 3 POINT %
+  LineType 1; 
+  % LINE Parameter Summary ------------------------------------------------- % 
+  % BUNDLE   LINE   LINE   LINE                                              % 
+  % INDEX    TYPE   WIDTH  COLOUR                                            % 
+  % default  set    set    set                                               % 
+  % 1        1      3.0    3 green                                           % 
+  % ------------------------------------------------------------------------ % 
+  Arc3Pt (32112,21299) (28398,17694) (31129,17039); 
+ 
+% Box 14 - CIRCULAR ARC 3 POINT CLOSE (CHORD) %
+  FillColr 5; 
+  HatchIndex 5; 
+  EdgeWidth 2.0; 
+  EdgeColr 9; 
+  % CLOSED FIGURE PARAMETER SUMMARY -------------------------------------------------------------------------------------- % 
+  % INTERIOR  FILL       HATCH      PATTERN    EDGE     EDGE     EDGE     EDGE       EDGE     FILL REF CHAR SET  ALT CHAR  %
+  % STYLE     COLOUR     INDEX      INDEX      BUNDLE   TYPE     WIDTH    COLOUR     VISIBIL. POINT    INDEX     SET NDX   %
+  % set       set        set        default    INDEX    default  set      set        set      default  default   default   % 
+  % HATCH     5 yellow   5 ###      1          def = 1  1        2.0      9 orange   on       ll corn  1         1         %
+  % ---------------------------------------------------------------------------------------------------------------------- % 
+  Arc3PtClose (4915,11796) (1092,7864) 
+              (3823,6553),chord; 
+ 
+% BOX 15 - CIRCULAR ARC CENTRE %
+  LineWidth 1.0;
+  LineType 1; 
+  % LINE Parameter Summary ------------------------------------------------- % 
+  % BUNDLE   LINE   LINE   LINE                                              % 
+  % INDEX    TYPE   WIDTH  COLOUR                                            % 
+  % default  set    set    set                                               % 
+  % 1        1      1.0    3 green                                           % 
+  % ------------------------------------------------------------------------ % 
+  %       x    y   DXs  DYs   DXe  DYe  rad    %
+  ArcCtr 8192,9830,5898,10485,9175,8192,2458; 
+ 
+% Box 16 - CIRCULAR ARC CENTRE CLOSE (PIE) %
+  HatchIndex 6; 
+  FillColr 2; 
+  EdgeColr 4; 
+  EdgeVis OFF; 
+  % CLOSED FIGURE PARAMETER SUMMARY -------------------------------------------------------------------------------------- % 
+  % INTERIOR  FILL       HATCH      PATTERN    EDGE     EDGE     EDGE     EDGE       EDGE     FILL REF CHAR SET  ALT CHAR  %
+  % STYLE     COLOUR     INDEX      INDEX      BUNDLE   TYPE     WIDTH    COLOUR     VISIBIL. POINT    INDEX     SET NDX   %
+  % set       set        set        default    INDEX    default  set      set        set      default  default   default   % 
+  % HATCH     2 red      6 xxx      1          def = 1  1        2.0      4 blue     off      ll corn  1         1         %
+  % ---------------------------------------------------------------------------------------------------------------------- % 
+  %            x     y   DXs  DYs   DXe   DYe  rad  type  %
+  ArcCtrClose 13631,9830,5898,10485,15728,8192,2458,pie; 
+ 
+% Box 17 - ELLIPSE %
+  FillColr 9; 
+  HatchIndex 4; 
+  EdgeColr 6; 
+  EdgeVis ON; 
+  % CLOSED FIGURE PARAMETER SUMMARY -------------------------------------------------------------------------------------- % 
+  % INTERIOR  FILL       HATCH      PATTERN    EDGE     EDGE     EDGE     EDGE       EDGE     FILL REF CHAR SET  ALT CHAR  %
+  % STYLE     COLOUR     INDEX      INDEX      BUNDLE   TYPE     WIDTH    COLOUR     VISIBIL. POINT    INDEX     SET NDX   %
+  % set       set        set        default    INDEX    default  set      set        set      default  default   default   % 
+  % HATCH     9 orange   4 \\\      1          def = 1  1        2.0      6 magenta  on       ll corn  1         1         %
+  % ---------------------------------------------------------------------------------------------------------------------- % 
+  Ellipse (19114,9830) 16973,7864,18022,10485; 
+ 
+% Box 18 - ELLIPTICAL ARC %
+  LineWidth 6.0; 
+  LineType 1; 
+  % LINE Parameter Summary ------------------------------------------------- % 
+  % BUNDLE   LINE   LINE   LINE                                              % 
+  % INDEX    TYPE   WIDTH  COLOUR                                            % 
+  % default  set    set    set                                               % 
+  % 1        1      6.0    3 green                                           % 
+  % ------------------------------------------------------------------------ % 
+  EllipArc (22282,9175)      % centre point      %
+           (19158,6226)      % 1st CDP endpoint  %
+           (19551,10158)     % 2nd CDP endpoint  %
+           (1311,3604)       % DX_start,DY_start %
+           (3277,-2949);     % DX_end,DY_end     % 
+ 
+% Box 19 - ELLIPTICAL ARC CLOSE (PIE) %
+  FillColr 3; 
+  HatchIndex 2; 
+  EdgeWidth 4.0; 
+  % CLOSED FIGURE PARAMETER SUMMARY -------------------------------------------------------------------------------------- % 
+  % INTERIOR  FILL       HATCH      PATTERN    EDGE     EDGE     EDGE     EDGE       EDGE     FILL REF CHAR SET  ALT CHAR  %
+  % STYLE     COLOUR     INDEX      INDEX      BUNDLE   TYPE     WIDTH    COLOUR     VISIBIL. POINT    INDEX     SET NDX   %
+  % set       set        set        default    INDEX    default  set      set        set      default  default   default   % 
+  % HATCH     3 green    2 |||      1          def = 1  1        4.0      6 magenta  on       ll corn  1         1         %
+  % ---------------------------------------------------------------------------------------------------------------------- % 
+  EllipArcClose  (27852,9175)          % centre point      %
+                 (24575,6226)          % 1st CDP endpoint  %
+                 (24903,10158)         % 2nd CDP endpoint  % 
+                 (1311,3932)           % DX_start,DY_start %
+                 (3277,-2621)          % DX_end,DY_end     %
+                  pie; 
+ 
+% Box "20" - LINE TYPE %
+  LineColr 2; 
+  LineWidth 2.0; 
+  LineType 5; 
+  % LINE Parameter Summary ------------------------------------------------- % 
+  % BUNDLE   LINE            LINE   LINE                                     % 
+  % INDEX    TYPE            WIDTH  COLOUR                                   % 
+  % default  set             set    set                                      % 
+  % 1        5 dash-dot-dot  2.0    2 red                                    % 
+  % ------------------------------------------------------------------------ % 
+  Line (1638,655) (19660,655); 
+ 
+  LineType 4; 
+  % LINE Parameter Summary ------------------------------------------------- % 
+  % BUNDLE   LINE            LINE   LINE                                     % 
+  % INDEX    TYPE            WIDTH  COLOUR                                   % 
+  % default  set             set    set                                      % 
+  % 1        4 dash-dot      6.0    2 red                                    % 
+  % ------------------------------------------------------------------------ % 
+  Line (1638,983),(19660,983); 
+ 
+  LineType 3; 
+  % LINE Parameter Summary ------------------------------------------------- % 
+  % BUNDLE   LINE            LINE   LINE                                     % 
+  % INDEX    TYPE            WIDTH  COLOUR                                   % 
+  % default  set             set    set                                      % 
+  % 1        3 dot           6.0    2 red                                    % 
+  % ------------------------------------------------------------------------ % 
+  Line (1638,1311) (19660,1311); 
+ 
+  LineType 2; 
+  % LINE Parameter Summary ------------------------------------------------- % 
+  % BUNDLE   LINE            LINE   LINE                                     % 
+  % INDEX    TYPE            WIDTH  COLOUR                                   % 
+  % default  set             set    set                                      % 
+  % 1        2 dash          6.0    2 red                                    % 
+  % ------------------------------------------------------------------------ % 
+  Line (1638,1638) (19660,1638); 
+ 
+  LineType 1; 
+  % LINE Parameter Summary ------------------------------------------------- % 
+  % BUNDLE   LINE            LINE   LINE                                     % 
+  % INDEX    TYPE            WIDTH  COLOUR                                   % 
+  % default  set             set    set                                      % 
+  % 1        1 solid         6.0    2 red                                    % 
+  % ------------------------------------------------------------------------ % 
+  Line (1638,1966) (19660,1966); 
+ 
+% Labels in Boxes %
+  TextFontIndex 3; 
+  TextPrec STROKE; 
+  CharExpan 0.8;   
+  CharSpace 0.01;  
+  TextColr 1;      
+  CharHeight 450;  
+  CharOri 0,1,1,0; 
+  TextPath RIGHT;  
+  % TEXT PARAMETER SUMMARY ------------------------------------------------------------------------------------- % 
+  % BUNDLE   FONT   TEXT       EXPAN   CHAR.  TEXT       CHAR.   CHAR.     TEXT     TEXT     CHAR SET  ALT CHAR  %
+  % INDEX    INDEX  PRECISION  FACTOR  SPACE  COLOUR     HEIGHT  ORIENT    PATH     ALIGN    INDEX     SET NDX   %
+  % default  set    set        set     set    set        set     set       set      default  default   default   % 
+  % 1        3      STROKE     0.8     0.01   1 BLACK    450     0,1,1,0   right    normal   1         1         %
+  % ------------------------------------------------------------------------------------------------------------ % 
+  Text   164,24575,final,"(1) POLYLINE"; 
+  Text  5625,24575,final,"(2) DISJOINT"; 
+  Text  5625,23920,final,"    POLYLINE"; 
+  Text 11086,24575,final,"(3) POLYMARKER"; 
+  Text 16547,24575,final,"(4) TEXT"; 
+  Text 22008,24575,final,"(5) RESTRICTED"; 
+  Text 22008,23920,final,"    TEXT"; 
+  Text 27470,24575,final,"(6) APPEND"; 
+  Text 27470,23920,final,"    TEXT"; 
+  Text   164,14745,final,"(7) POLYGON"; 
+  Text  5625,14745,final,"(8) POLYGON"; 
+  Text  5625,14090,final,"    SET"; 
+  Text 11086,14745,final,"(9) CELL"; 
+  Text 11086,14090,final,"    ARRAY"; 
+  % Not Included - - - -  (10) GENERALIZED DRAWING PRIMATIVE (GDP) - %
+  Text 16547,14745,final,"(11) RECTANGLE"; 
+  Text 22008,14745,final,"(12) CIRCLE"; 
+  Text 27470,14745,final,"(13) CIRCULAR"; 
+  Text 27470,14090,final,"     ARC 3 POINT"; 
+  Text   164,4915,final,"(14) CIRCULAR"; 
+  Text   164,4260,final,"     ARC 3 POINT"; 
+  Text   164,3604,final,"     CLOSE"; 
+  Text  5625,4915,final,"(15) CIRCULAR"; 
+  Text  5625,4260,final,"     ARC CENTRE"; 
+  Text 11086,4915,final,"(16) CIRCULAR"; 
+  Text 11086,4260,final,"     ARC CENTRE"; 
+  Text 11086,3604,final,"     CLOSE"; 
+  Text 16547,4915,final,"(17) ELLIPSE"; 
+  Text 22008,4915,final,"(18) ELLIPTICAL"; 
+  Text 22008,4260,final,"     ARC"; 
+  Text 27470,4915,final,"(19) ELLIPTICAL"; 
+  Text 27470,4260,final,"     ARC CLOSE"; 
+  Text  1638,2359,final,"LINE TYPE"; 
+ 
+  CharHeight 200;  
+  % TEXT PARAMETER SUMMARY ------------------------------------------------------------------------------------- % 
+  % BUNDLE   FONT   TEXT       EXPAN   CHAR.  TEXT       CHAR.   CHAR.     TEXT     TEXT     CHAR SET  ALT CHAR  %
+  % INDEX    INDEX  PRECISION  FACTOR  SPACE  COLOUR     HEIGHT  ORIENT    PATH     ALIGN    INDEX     SET NDX   %
+  % default  set    set        set     set    set        set     set       set      default  default   default   % 
+  % 1        3      STROKE     0.8     0.01   1 BLACK    200     0,1,1,0   right    normal   1         1         %
+  % ------------------------------------------------------------------------------------------------------------ % 
+  Text 750,1966,final,"1."; 
+  Text 750,1638,final,"2."; 
+  Text 750,1311,final,"3."; 
+  Text 750,983,final,"4."; 
+  Text 750,655,final,"5."; 
+ 
+% Figure Label %
+  CharHeight 450;  
+  % TEXT PARAMETER SUMMARY ------------------------------------------------------------------------------------- % 
+  % BUNDLE   FONT   TEXT       EXPAN   CHAR.  TEXT       CHAR.   CHAR.     TEXT     TEXT     CHAR SET  ALT CHAR  %
+  % INDEX    INDEX  PRECISION  FACTOR  SPACE  COLOUR     HEIGHT  ORIENT    PATH     ALIGN    INDEX     SET NDX   %
+  % default  set    set        set     set    set        set     set       set      default  default   default   % 
+  % 1        3      STROKE     0.8     0.01   1 BLACK    450     0,1,1,0   right    normal   1         1         %
+  % ------------------------------------------------------------------------------------------------------------ % 
+  Text 22063,2621,final,"CALS TEST NETWORK"; 
+  Text 22063,1868,final,"MIL-D-28003A"; 
+  Text 22063,1114,final,"Computer Graphics Metafile"; 
+  Text 22063,360,final,"File: CTN-01Id, Draft 94-04-12.h"; 
+ 
+EndPIC; 
+EndMF; 
+ 
+%  grid coordinates
+       0              9000           18000          27000          36000
+       |    3000      :    12000     |    21000     :    30000     |
+       |    :    6000 :    |    15000|    :    24000:    |    33000|
+       |    :    |    :    |    :    |    :    |    :    |    :    |
+  1.0 -+---------+---------+---------+---------+---------+---------+ -1.0 36000
+   .9  |    c    |    c    |    c    |    c    |    c    |    c    |   .9 29160
+   .8 >|         |         |         |         |         |         | < .8 28800
+   .7 -+---------+---------+---------+---------+---------+---------+ - .7 25200
+   .6  |    c    |    c    |    c    |    c    |    c    |    c    |   .6 21600
+   .5 >|         |         |         |         |         |         | < .5 18000
+   .4 -+---------+---------+---------+---------+---------+---------+ - .4 14400
+   .3  |    c    |    c    |    c    |    c    |    c    |    c    |   .3 10800
+   .2 >|         |         |         |         |         |         | < .2  7200
+   .1 -+---------+---------+---------+---------+---------+---------+ - .1  3600
+       |                             |                   |
+  0.0 -+---------+---------+---------+---------+---------+---------+ -0.0     0
+       0    :    |    9000 |    :    18000:    |    27000|    :    36000
+            3000 |    :    12000:         21000|         30000:
+                 6000           15000          24000          33000    %
+

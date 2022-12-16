@@ -1,0 +1,8 @@
+Notes and corrections regarding the AGOCG files.
+
+allprims.cgm
+  At 4C8, there is an extra '00' byte.
+  This extra byte prevents reading the rest of the file.
+  This has been corrected in the file 'allprims-00byteRemovedAt4C8.cgm'.
+
+
