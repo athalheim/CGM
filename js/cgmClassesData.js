@@ -1492,7 +1492,7 @@ classBinary = {
             desc:  'CHARACTER ORIENTATION',
             text:  'CHARORI',
             parm:  '4VDC',
-            init:  '[0.0,1.0, 1.0, 0.0]',
+            init:  '[0,1,1,0]',
             types: null,
             func() {
                 read._Value('_Point'); // Up Component
@@ -1516,7 +1516,7 @@ classBinary = {
             desc:  'TEXT ALIGNMENT',
             text:  'TEXTALIGN',
             parm:  '2E,R,R',
-            init:  '[0,0,0.0,0.0]',
+            init:  '[0,0,0,0]',
             types: {
                 horizontalMode: {
                     0: "NORMHORIZ",
@@ -1667,7 +1667,7 @@ classBinary = {
             desc:  'FILL REFERENCE POINT',
             text:  'FILLREFPT',
             parm:  'P',
-            init:  '[0.0, 0.0]',
+            init:  '[0,0]',
             types: null,
             func() { read._Value('_Point'); }
         },
@@ -1689,7 +1689,7 @@ classBinary = {
             desc:  'PATTERN SIZE',
             text:  'PATSIZE',
             parm:  '4SS',
-            init:  '[1.0,0.0,0.0,1.0]',
+            init:  '[0,1,1,0]',
             types: null,
             func() {
                 valueType                 = read._getInteriorMode();
@@ -1940,7 +1940,7 @@ classBinary = {
             desc:  'SYMBOL SIZE',
             text:  'SYMBOLSIZE',
             parm:  'E,2VDC',
-            init:  '[2,1.0,1.0]',
+            init:  '[2,1,1]',
             types: {
                 0: "HEIGHT",
                 1: "WIDTH",
@@ -1956,7 +1956,7 @@ classBinary = {
             desc:  'SYMBOL ORIENTATION',
             text:  'SYMBOLORI',
             parm:  '4VDC',
-            init:  '[1.0,0.0,0.0,1.0]',
+            init:  '[0,1,1,0]',
             types: null,
             func() {
                 read._Value('_VDC'); // Up X
