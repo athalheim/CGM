@@ -458,7 +458,8 @@
                     <th id="errorCount"      style="background-color:red;"       title="Errors count"></th>
                     <th id="graphicCount"    style="background-color:lightBlue;" title="Graphic elements count"></th>
                     <th id="complianceCount" style="background-color:yellow;"    title="No-Compliance count"></th>
-                    <th colspan="2">&nbsp;</th>
+                    <th><input type="button" id="save"  value="Save" onclick = "cgm.saveClearText();" style="visibility:hidden; background-color: silver;" title="Save Clear Text CGM content (in 'Downloads')"></th>
+                    <th>&nbsp;</th>
                 </tr>
             </thead>
         </table>
@@ -491,6 +492,7 @@
                     if (thisSelect.id !== selectId) {
                         thisSelect.selectedIndex                 = 0;
                         thisSelect.style.backgroundColor         = document.body.style.backgroundColor;
+                        document.getElementById('save').style.visibility = 'hidden';
                     }
                 }
                     // Select and highlight list
@@ -520,6 +522,7 @@
             graphicCount                                         = 0;
                 // Codes data
             document.getElementById("codesDiv").innerHTML        = '';
+            saveContent                                          = '';
             cgm.codes.forEach(classCodeData => {
                 textStyle                                        = '';
                 if (classCodeData.parameters.indexOf('Error') > -1) { 
@@ -539,6 +542,7 @@
                     }
                 }
                 document.getElementById("codesDiv").innerHTML   += '<div style="text-align:left;' + textStyle + '">' + classCodeData.text + classCodeData.parameters + '</div>'
+                saveContent                                     += classCodeData.text + classCodeData.parameters + '\n';
             });
                 // File data:
             if (errorCount > 0) {
@@ -554,6 +558,7 @@
             } else {
                 document.getElementById("complianceCount").innerHTML = '';
             }
+            document.getElementById('save').style.visibility = 'visible';
         });
     </script>
 </html>
