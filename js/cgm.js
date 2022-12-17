@@ -230,6 +230,14 @@ var cgm = {
             // Exit with true when 'End Metafile' encountered
         return ((thisClassId === 0) && (thisCodeId === 2));
     },
+    saveClearText() {
+        clearTextBlob                            = new Blob([saveContent], { type: 'text/plain' });
+        a                                        = document.createElement('a');
+        a.download                               = cgm.filename;
+        a.href                                   = window.URL.createObjectURL(clearTextBlob);
+        a.click();
+        
+    },
 };
 
 /* -\\- */
